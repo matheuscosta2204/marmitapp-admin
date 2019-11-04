@@ -8,3 +8,46 @@
     background-position: 0px;
     background-repeat: no-repeat;
 }
+
+.home-content {
+    color: white;
+    margin-top: 12rem;
+}
+
+.home-content h1 {
+    text-shadow: 2px 2px 5px rgba(0,0,0,0.8);
+}
+
+.home-partners-buttom {
+    background-color: #C31212;
+    color: white;
+    padding: 1rem 2rem 1rem 2rem;
+    margin-top: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 5px 5px 15px 0px rgba(0,0,0,0.75);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.home-partners-buttom h5 {
+    margin-left: 20px;
+    margin-bottom: 0;
+}
+
+.home-partners-buttom:hover {
+    background-color: #750b0b;
+    color: white;
+    text-decoration: none;
+}
+
+.home-store-content {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 100px;
+}
+
+.home-store-content img {
+    margin: 0 15px 0 15px;
+}
