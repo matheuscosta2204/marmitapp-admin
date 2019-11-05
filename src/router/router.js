@@ -5,7 +5,6 @@ import {
   Route
 } from "react-router-dom";
 
-import Toolbar from '../ui/toolbar/toolbar';
 import Home from '../components/home/home';
 import Login from '../components/login/login';
 import Register from '../components/register/register';
@@ -18,11 +17,9 @@ const RouterApp = () => {
                 <Home />
             </Route>
             <Route path="/login">
-                <Toolbar />
                 <Login />
             </Route>
             <Route path="/register">
-                <Toolbar />
                 <Register />
             </Route>
             </Switch>

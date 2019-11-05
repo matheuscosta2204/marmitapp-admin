@@ -3,6 +3,7 @@ import { Container, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSearch } from '@fortawesome/free-solid-svg-icons'
+import QRCode from 'qrcode.react';
 
 import './home.scss';
 import Toolbar from '../../ui/toolbar/toolbar';
@@ -21,8 +22,14 @@ const Home = () => {
                 </Link>
             </Row>
             <Row className="home-store-content">
-                <img src={GooglePlayLogo} alt="google play" width="50" />
-                <img src={AppStoreLogo} alt="app store" width="50" />
+                <div className="home-store-columns">
+                <a href="googlePlay"><img src={GooglePlayLogo} alt="google play" width="70" /></a>
+                    <QRCode value="googlePlay" size={100} includeMargin renderAs="svg" />
+                </div>
+                <div className="home-store-columns">
+                    <a href="appStore"><img src={AppStoreLogo} alt="app store" width="70" /></a>
+                    <QRCode value="appStore" size={100} includeMargin renderAs="svg" />
+                </div>
             </Row>
         </Container>
     )

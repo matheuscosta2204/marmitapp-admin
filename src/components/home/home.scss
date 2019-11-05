@@ -48,6 +48,12 @@
     margin-top: 100px;
 }
 
-.home-store-content img {
-    margin: 0 15px 0 15px;
+.home-store-columns {
+    display: flex;
+    align-items: center;
+    margin: 0 50px 0 50px;
+}
+
+.home-store-columns img {
+    margin: 0 25px 0 25px;
 }
