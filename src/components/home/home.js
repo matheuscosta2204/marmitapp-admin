@@ -24,11 +24,11 @@ const Home = () => {
             <Row className="home-store-content">
                 <div className="home-store-columns">
                 <a href="googlePlay"><img src={GooglePlayLogo} alt="google play" width="70" /></a>
-                    <QRCode value="googlePlay" size={100} includeMargin renderAs="svg" />
+                    <QRCode value="googlePlay" size={90} includeMargin renderAs="svg" />
                 </div>
                 <div className="home-store-columns">
                     <a href="appStore"><img src={AppStoreLogo} alt="app store" width="70" /></a>
-                    <QRCode value="appStore" size={100} includeMargin renderAs="svg" />
+                    <QRCode value="appStore" size={90} includeMargin renderAs="svg" />
                 </div>
             </Row>
         </Container>

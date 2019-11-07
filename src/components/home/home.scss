@@ -5,7 +5,7 @@
     min-height: 100vh;
     background-image: url("../../media/images/home-background.png");
     background-size: 100%;
-    background-position: 0px;
+    background-position: bottom center;
     background-repeat: no-repeat;
 }
 
@@ -56,4 +56,28 @@
 
 .home-store-columns img {
     margin: 0 25px 0 25px;
+}
+
+@media only screen and (max-width: 1400px) {
+    .home-content {
+        margin-top: 6rem;
+    }
+}
+
+@media only screen and (max-width: 800px) {
+    .home-content {
+        margin-top: 3rem;
+    }
+
+    .home-content h1{
+        font-size: 2rem;
+    }
+
+    .home-store-content {
+        margin-top: 50px;
+    }
+
+    .home-store-columns {
+        margin: 20px 50px 20px 50px;
+    }
 }
