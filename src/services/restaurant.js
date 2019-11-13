@@ -10,7 +10,7 @@ const headers = {
 
 export const login = (body) =>
   fetch(`${api}auth/restaurants/`, { 
-      mode: "no-cors",
+      mode: "cors",
       method: "POST",
       headers,
       body: JSON.stringify(body)

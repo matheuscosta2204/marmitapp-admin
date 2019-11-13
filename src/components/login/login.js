@@ -1,30 +1,40 @@
 import React, { useState } from 'react';
+import { Redirect } from 'react-router-dom';
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 
 import './login.scss';
 import Toolbar from '../../ui/toolbar/toolbar';
+import { connect } from 'react-redux';
 
+import { setAuthedUser } from '../../actions/authedUser';
 import { login } from '../../services/restaurant';
 
-const Login = () => {
+const Login = (props) => {
 
+    const [redirect, setRedirect] = useState(false);
     const [enteredEmail, setEnteredEmail] = useState();
     const [enteredPassword, setEnteredPassword] = useState();
 
     const onSubmit = () => {        
         const body = { email: enteredEmail, password: enteredPassword };
 
-        console.log("form", body);
-
-        login(body).then(res => {
-            console.log("res: ", res);
+        login(body).then(user => {
+            setRedirect(true);
+            props.dispatch(setAuthedUser(user));
         }).catch(err => {
             console.log("err: ", err);
         })
     }
 
+    const renderRedirect = () => {
+        if (redirect) {
+            return <Redirect to='/admin' />
+        }
+    }
+
     return (
         <Container className="login-container">
+            {renderRedirect()}
             <Toolbar />
             <Row>
                 <Col md={{ span: 4, offset: 4 }}>
@@ -47,6 +57,12 @@ const Login = () => {
             </Row>
         </Container>
     )
+};
+
+function mapStateToProps({ user }) {
+    return {
+        user
+    };
 }
 
-export default Login;
+export default connect(mapStateToProps)(Login);

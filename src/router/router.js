@@ -8,6 +8,7 @@ import {
 import Home from '../components/home/home';
 import Login from '../components/login/login';
 import Register from '../components/register/register';
+import Partners from "../components/partners/partners";
 
 const RouterApp = () => {
     return (
@@ -21,6 +22,9 @@ const RouterApp = () => {
             </Route>
             <Route path="/register">
                 <Register />
+            </Route>
+            <Route path="/partners">
+                <Partners />
             </Route>
             </Switch>
         </Router>
