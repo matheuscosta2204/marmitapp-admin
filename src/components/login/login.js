@@ -1,68 +1,62 @@
 import React, { useState } from 'react';
 import { Redirect } from 'react-router-dom';
-import { Container, Row, Col, Form, Button } from 'react-bootstrap';
-
-import './login.scss';
-import Toolbar from '../../ui/toolbar/toolbar';
+import { Row, Col, Form, Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
 
-import { setAuthedUser } from '../../actions/authedUser';
-import { login } from '../../services/restaurant';
+import { login } from '../../actions/authedUser';
+import './login.scss';
 
 const Login = (props) => {
 
-    const [redirect, setRedirect] = useState(false);
-    const [enteredEmail, setEnteredEmail] = useState();
-    const [enteredPassword, setEnteredPassword] = useState();
+    const [formData, setFormData] = useState({
+        email: '',
+        cnpj: '',
+        name: '',
+        password: '',
+        password2: ''
+    });
 
-    const onSubmit = () => {        
-        const body = { email: enteredEmail, password: enteredPassword };
+    const { email, password } = formData;
 
-        login(body).then(user => {
-            setRedirect(true);
-            props.dispatch(setAuthedUser(user));
-        }).catch(err => {
-            console.log("err: ", err);
-        })
+    const onChange = e =>
+        setFormData({ ...formData, [e.target.name]: e.target.value });
+
+    const onSubmit = async e => {
+        e.preventDefault();
+        props.login(email, password);
     }
 
-    const renderRedirect = () => {
-        if (redirect) {
-            return <Redirect to='/admin' />
-        }
+    if(props.isAuthenticated) {
+        return <Redirect to="dashboard" />
     }
 
     return (
-        <Container className="login-container">
-            {renderRedirect()}
-            <Toolbar />
-            <Row>
-                <Col md={{ span: 4, offset: 4 }}>
-                    <Form className="login-form">
-                        <Form.Group controlId="formBasicEmail">
-                            <Form.Label>Email address</Form.Label>
-                            <Form.Control type="email" placeholder="Enter email" value={enteredEmail} onChange={event => setEnteredEmail(event.target.value)} />
-                        </Form.Group>
+        <Row>
+            <Col md={{ span: 4, offset: 4 }}>
+                <Form className="login-form">
+                    <Form.Group controlId="formBasicEmail">
+                        <Form.Label>Email address</Form.Label>
+                        <Form.Control type="email" placeholder="Enter email" name="email" value={email} onChange={e => onChange(e)} />
+                    </Form.Group>
 
-                        <Form.Group controlId="formBasicPassword">
-                            <Form.Label>Password</Form.Label>
-                            <Form.Control type="password" placeholder="Password" value={enteredPassword} onChange={event => setEnteredPassword(event.target.value)}/>
-                        </Form.Group>
-                        
-                        <Button variant="success" block type="button" onClick={onSubmit}>
-                            Login
-                        </Button>
-                    </Form>
-                </Col>
-            </Row>
-        </Container>
+                    <Form.Group controlId="formBasicPassword">
+                        <Form.Label>Password</Form.Label>
+                        <Form.Control type="password" placeholder="Enter password" name="password" value={password} onChange={e => onChange(e)}/>
+                    </Form.Group>
+                    
+                    <Button variant="success" block type="button" onClick={onSubmit}>
+                        Login
+                    </Button>
+                </Form>
+            </Col>
+        </Row>
     )
 };
 
-function mapStateToProps({ user }) {
+function mapStateToProps({ auth }) {
     return {
-        user
+        isAuthenticated: auth.isAuthenticated
     };
 }
 
-export default connect(mapStateToProps)(Login);
+export default connect(mapStateToProps, { login })(Login);

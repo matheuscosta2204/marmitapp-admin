@@ -1,19 +1,17 @@
 import React from 'react';
-import { Container, Row } from 'react-bootstrap';
+import { Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSearch } from '@fortawesome/free-solid-svg-icons'
 import QRCode from 'qrcode.react';
 
 import './home.scss';
-import Toolbar from '../../ui/toolbar/toolbar';
 import GooglePlayLogo from '../../media/svg/google-play.svg';
 import AppStoreLogo from '../../media/svg/app-store.svg';
 
 const Home = () => {
     return (
-        <Container className="home-container">
-            <Toolbar />
+        <>
             <Row className="flex-column align-items-center home-content">
                 <h1>Find your menu today!</h1>
                 <Link to="/partners" className="home-partners-buttom">
@@ -31,7 +29,7 @@ const Home = () => {
                     <QRCode value="appStore" size={90} includeMargin renderAs="svg" />
                 </div>
             </Row>
-        </Container>
+        </>
     )
 }
 
