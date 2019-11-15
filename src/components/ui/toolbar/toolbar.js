@@ -3,6 +3,7 @@ import { Navbar, Nav, Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
 
 import { logout } from '../../../actions/authedUser';
+import './toolbar.scss';
 
 const Toolbar = (props) => {
     const authLinks = (
@@ -20,7 +21,7 @@ const Toolbar = (props) => {
 
     return (
         <Navbar bg="transparent" variant="dark" expand="lg">
-            <Navbar.Brand href="./"><img src="./FullLogo.png" alt="logo" height="70px" /></Navbar.Brand>
+            <Navbar.Brand href="./"><img src="./FullLogo.png" alt="logo" className="nav-bar-logo" /></Navbar.Brand>
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav" className="justify-content-end">
                 {!props.auth.loading && (props.auth.isAuthenticated ? authLinks : guestLinks) }

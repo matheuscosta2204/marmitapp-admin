@@ -1,13 +1,31 @@
-.partners-container {
-    background-color: #20232A;
-    min-width: 100%;
-    min-height: 100vh;
-    background-image: url("../../media/images/home-background.png");
-    background-size: 100%;
-    background-position: bottom center;
-    background-repeat: no-repeat;
+.partners-list {
+    height: 40vh;
+    border-radius: 5px;
 }
 
-.partners-list-container {
-    
+.search-alert {
+    font-size: 2rem;
+    color: white;
+    font-weight: 700;
+    text-align: center;
+}
+
+.partner-item {
+    display: flex;
+    flex-direction: column;
+}
+
+.partner-item .title {
+    font-size: 1.2rem;
+    font-weight: 500;
+}
+
+.partner-item .subtitle {
+    font-size: 0.9rem;
+    color: grey;
+    padding-left: 10px;
+}
+
+.partners-spinner {
+    text-align: center;
 }
