@@ -21,6 +21,6 @@ const RouterApp = () => {
             <PrivateRoute exact path="/dashboard" component={Dashboard} />
         </Switch>
     )
-}
+};
 
 export default RouterApp;

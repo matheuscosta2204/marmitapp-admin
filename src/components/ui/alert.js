@@ -5,7 +5,7 @@ import { Alert, AlertContainer } from "react-bs-notifier";
 const AlertComponent = props => 
     props.alerts !== null &&
     props.alerts.length > 0 && 
-    <AlertContainer position="bottom-right">
+    <AlertContainer position="middle-left">
         {props.alerts.map(alert => (
             <Alert key={alert.id} type={alert.alertType} showIcon={false}>
                 { alert.msg }

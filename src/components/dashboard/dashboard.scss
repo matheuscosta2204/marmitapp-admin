@@ -1,8 +1,17 @@
-.dashboard-account-form {
-    margin-top: 4rem;
+.dashboard .nav-item {
+    font-size: 1.5rem;
+    color: white;
+}
+
+.dashboard .nav-item:hover {
+    font-size: 1.5rem;
+    color: grey;
+}
+
+.dashboard-box {
     background-color: #ffffff;
     padding: 20px;
-    border-radius: 8px;
+    border-radius: 0 0 8px 8px;
     box-shadow: 5px 5px 15px 0px rgba(0,0,0,0.75);
 }
 

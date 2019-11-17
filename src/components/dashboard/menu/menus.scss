@@ -1,0 +1,22 @@
+.add-menu-container {
+    display: flex;
+    justify-content: flex-end;
+    padding-right: 15px;
+}
+
+.menus .nav-item {
+    font-size: 1.5rem;
+    color: black;
+}
+
+.menus .nav-item:hover {
+    font-size: 1.5rem;
+    color: grey;
+}
+
+.dishes-container {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    margin: 5px;
+}
