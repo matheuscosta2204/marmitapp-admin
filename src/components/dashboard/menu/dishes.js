@@ -1,19 +1,24 @@
 import React from 'react';
+import { Button } from 'react-bootstrap';
+import { connect } from 'react-redux';
 
-const Dishes = ({ dishes, title, type }) => {
+import { addDish, removeDish } from '../../../actions/menu';
+import Dish from './dish';
+
+const Dishes = ({ dishes, title, type, addDish, removeDish }) => {
     let color;
     switch(type) {
         case 'mainDishes':
             color = '#0066ff';
             break;
         case 'sideDishes':
-            color = '#006600';
+            color = '#cc9900';
             break;
         case 'salads':
-            color = '#ff6666';
+            color = '#006600';
             break;
         case 'desserts':
-            color = '#cc9900';
+            color = '#ff6666';
             break;
         default:
             color = '#000';
@@ -24,15 +29,16 @@ const Dishes = ({ dishes, title, type }) => {
 
     }
     return (
-        <div className="dishes-container" style={{ borderWidth: '1px', borderStyle: 'solid', borderRadius: '8px', borderColor: color }}>
-            <h4>{title}</h4>
-            {dishes.map(dish => (
-                <div>
-                    {dish}
-                </div>
+        <div className="dishes-container" style={{ borderLeftWidth: '3px', borderLeftStyle: 'solid', borderColor: color }}>
+            <div className="dishes-header">
+                <h4>{title}</h4>
+                <Button variant="success" onClick={() => addDish(type)}>Add Dish</Button>
+            </div>
+            {dishes.map((dish, index) => (
+                <Dish value={dish} key={index} onClick={() => removeDish(type, index)} />
             ))}
         </div>
     );
 };
 
-export default Dishes;
+export default connect(null, { addDish, removeDish })(Dishes);

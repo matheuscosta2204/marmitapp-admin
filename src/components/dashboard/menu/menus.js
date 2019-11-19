@@ -1,43 +1,28 @@
 import React from 'react';
-import moment from 'moment';
 import { Button } from 'react-bootstrap';
+import { connect } from 'react-redux';
 
 import ListMenus from './listMenus';
 import './menus.scss';
 
-const menus = [
-    {
-        date: moment().format('DD/MM/YYYY'),
-        mainDishes: ["firstDish", "secondDish", "thirdDish"],
-        sideDishes: ["firstDish", "secondDish", "thirdDish"],
-        salads: ["firstSalad", "secondSalad", "thirdSalad"],
-        desserts: ["firstDessert", "secondDessert", "thirdDessert"]
-    },
-    {
-        date: "16/11/2019",
-        mainDishes: ["firstDish", "secondDish", "thirdDish"],
-        sideDishes: ["firstDish", "secondDish", "thirdDish"],
-        salads: ["firstSalad", "secondSalad", "thirdSalad"],
-        desserts: ["firstDessert", "secondDessert", "thirdDessert"]
-    },
-    {
-        date: "15/11/2019",
-        mainDishes: ["firstDish", "secondDish", "thirdDish"],
-        sideDishes: ["firstDish", "secondDish", "thirdDish"],
-        salads: ["firstSalad", "secondSalad", "thirdSalad"],
-        desserts: ["firstDessert", "secondDessert", "thirdDessert"]
-    }
-]
-
-const Menus = () => {
+const Menus = ({ menus }) => {
     return (
         <div className="dashboard-box">
-            <div className="add-menu-container">
+            <div className="buttons-menu-container">
                 <Button variant="success">Add Menu</Button>
+                <Button variant="danger">Remove Menu</Button>
             </div>
             <ListMenus menus={menus} />
         </div>
     )
 };
 
-export default Menus;
+function mapStateToProps({ menu }) {
+    return {
+        menus: Object.keys(menu.menus).map(key => {
+            return menu.menus[key];
+        })
+    }
+};
+
+export default connect(mapStateToProps)(Menus);

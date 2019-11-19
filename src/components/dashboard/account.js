@@ -45,7 +45,7 @@ const Account = ({ loading, restaurant, getCurrentRestaurant, setAlert, updateCu
             phone: loading || !restaurant.phone ? '' : restaurant.phone,
             active: loading || !restaurant.active ? false : restaurant.active,
         });
-    }, [loading]);
+    }, [loading, restaurant, getCurrentRestaurant]);
 
     const { logo, name, cnpj, email, password, newPassword, zipCode, address, number, phone, active } = formData;
 

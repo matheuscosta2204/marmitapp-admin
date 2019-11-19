@@ -1,14 +1,14 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Tabs, Tab } from 'react-bootstrap';
+import { connect } from 'react-redux';
 
+import { setTabKey } from '../../../actions/menu';
 import Dishes from './dishes';
 import './menus.scss';
 
-const Menus = ({ menus }) => {
-    const [key, setKey] = useState(menus[0].date);
-
+const Menus = ({ menus, tabKey, setTabKey }) => {
     return (
-        <Tabs id="controlled-tab-example" activeKey={key} onSelect={k => setKey(k)} className="menus mt-5">
+        <Tabs id="controlled-tab-example" activeKey={tabKey} onSelect={k => setTabKey(k)} className="menus mt-5">
             {menus.map(menu => (
                 <Tab eventKey={menu.date} title={menu.date}>
                     <Dishes dishes={menu.mainDishes} type="mainDishes" title="Main Dishes" />
@@ -21,4 +21,10 @@ const Menus = ({ menus }) => {
     );
 };
 
-export default Menus;
+function mapStateToProps({ menu }) {
+    return {
+        tabKey: menu.tabKey
+    }
+}
+
+export default connect(mapStateToProps, { setTabKey })(Menus);
