@@ -1,5 +1,5 @@
-//import moment from 'moment';
-import { SET_TAB_KEY, ADD_MENU, REMOVE_MENU, ADD_DISH, REMOVE_DISH } from '../actions/menu';
+import { SET_TAB_KEY, ADD_MENU, REMOVE_MENU, ADD_DISH, UPDATE_DISH,REMOVE_DISH } from '../actions/menu';
+import moment from 'moment';
 
 const initialState = {
     tabKey: "17/11/2019",
@@ -28,6 +28,14 @@ const initialState = {
     }
 };
 
+const newMenu = {
+    date: moment().format('DD/MM/YYYY'),
+        mainDishes: [""],
+        sideDishes: [""],
+        salads: [""],
+        desserts: [""]
+}
+
 export default function menu(state = initialState, action) {
     const { type, payload } = action;
 
@@ -38,9 +46,20 @@ export default function menu(state = initialState, action) {
                 tabKey: payload.key
             }
         case ADD_MENU:
-            return state;
+            return {
+                ...state,
+                tabKey: moment().format('DD/MM/YYYY'),
+                menus: {
+                    [moment().format('DD/MM/YYYY')]: newMenu,
+                    ...state.menus
+                }
+            }
         case REMOVE_MENU:
-            return state;
+            return {
+                ...state,
+                tabKey: Object.keys(payload.menus)[0],
+                menus: payload.menus
+            }
         case ADD_DISH:
             return {
                 ...state,
@@ -49,6 +68,22 @@ export default function menu(state = initialState, action) {
                     [state.tabKey]: {
                         ...state.menus[state.tabKey],
                         [payload.type]: [...state.menus[state.tabKey][payload.type], ""]
+                    }
+                }
+            }
+        case UPDATE_DISH:
+            return {
+                ...state,
+                menus: {
+                    ...state.menus,
+                    [state.tabKey]: {
+                        ...state.menus[state.tabKey],
+                        [payload.type]: state.menus[state.tabKey][payload.type].map((dish, index) => {
+                            if (payload.index === index) {
+                                dish = payload.value;
+                            }
+                            return dish;
+                        })
                     }
                 }
             }

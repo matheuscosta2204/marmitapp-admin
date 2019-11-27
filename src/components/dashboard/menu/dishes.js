@@ -2,10 +2,10 @@ import React from 'react';
 import { Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
 
-import { addDish, removeDish } from '../../../actions/menu';
+import { addDish, removeDish, updateDish } from '../../../actions/menu';
 import Dish from './dish';
 
-const Dishes = ({ dishes, title, type, addDish, removeDish }) => {
+const Dishes = ({ dishes, title, type, addDish, updateDish, removeDish }) => {
     let color;
     switch(type) {
         case 'mainDishes':
@@ -35,10 +35,14 @@ const Dishes = ({ dishes, title, type, addDish, removeDish }) => {
                 <Button variant="success" onClick={() => addDish(type)}>Add Dish</Button>
             </div>
             {dishes.map((dish, index) => (
-                <Dish value={dish} key={index} onClick={() => removeDish(type, index)} />
+                <Dish 
+                    value={dish} 
+                    key={index} 
+                    onClick={() => removeDish(type, index)} 
+                    onChange={(value) => updateDish({ type, index, value })} />
             ))}
         </div>
     );
 };
 
-export default connect(null, { addDish, removeDish })(Dishes);
+export default connect(null, { addDish, updateDish, removeDish })(Dishes);

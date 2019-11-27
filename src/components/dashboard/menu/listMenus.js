@@ -10,7 +10,7 @@ const Menus = ({ menus, tabKey, setTabKey }) => {
     return (
         <Tabs id="controlled-tab-example" activeKey={tabKey} onSelect={k => setTabKey(k)} className="menus mt-5">
             {menus.map(menu => (
-                <Tab eventKey={menu.date} title={menu.date}>
+                <Tab eventKey={menu.date} title={menu.date} key={menu.date}>
                     <Dishes dishes={menu.mainDishes} type="mainDishes" title="Main Dishes" />
                     <Dishes dishes={menu.sideDishes} type="sideDishes" title="Side Dishes" />
                     <Dishes dishes={menu.salads} type="salads" title="Salads" />

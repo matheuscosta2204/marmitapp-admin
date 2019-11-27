@@ -170,7 +170,8 @@ const Account = ({ loading, restaurant, getCurrentRestaurant, setAlert, updateCu
                         type="password" 
                         placeholder="Enter currently password" 
                         name="password"
-                        value={password}
+                        autoComplete="off"
+                        value={password || ''}
                         onChange={e => onChange(e)} />
                 </Form.Group>
                 <Form.Group as={Col} md="4" controlId="formNewPassword">
@@ -179,7 +180,8 @@ const Account = ({ loading, restaurant, getCurrentRestaurant, setAlert, updateCu
                         type="password" 
                         placeholder="Enter new password" 
                         name="newPassword"
-                        value={newPassword}
+                        autoComplete="off"
+                        value={newPassword || ''}
                         onChange={e => onChange(e)} />
                 </Form.Group>
                 <Form.Group as={Row}>
