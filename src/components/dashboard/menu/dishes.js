@@ -32,7 +32,7 @@ const Dishes = ({ dishes, title, type, addDish, updateDish, removeDish }) => {
         <div className="dishes-container" style={{ borderLeftWidth: '3px', borderLeftStyle: 'solid', borderColor: color }}>
             <div className="dishes-header">
                 <h4>{title}</h4>
-                <Button variant="success" onClick={() => addDish(type)}>Add Dish</Button>
+                <Button variant="success" onClick={() => addDish(dishes, type)}>Add Dish</Button>
             </div>
             {dishes.map((dish, index) => (
                 <Dish 

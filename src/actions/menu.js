@@ -15,15 +15,16 @@ export const setTabKey = key => dispatch => {
     });
 }
 
-export const addMenu = (menus) => dispatch => {
+export const addMenu = (menus, date) => dispatch => {
     if(Object.keys(menus).length >= 3) {
         dispatch(setAlert("Max menus added, please, remove to insert a new one.", "danger"));
-    } else if(Object.keys(menus).includes(moment().format('DD/MM/YYYY'))) {
+    } else if(Object.keys(menus).includes(moment(date).format('DD/MM/YYYY'))) {
         dispatch(setAlert("There already is a menu for this date", "danger"));
     } 
     else {
         dispatch({
-            type: ADD_MENU
+            type: ADD_MENU,
+            payload: { date }
         });
         dispatch(setAlert("Menu added successfuly", "success"));
     }
@@ -43,11 +44,19 @@ export const removeMenu = (menus, tabKey) => dispatch => {
     }
 }
 
-export const addDish = type => dispatch => {
-    dispatch({
-        type: ADD_DISH,
-        payload: { type }
-    })
+export const addDish = (dishes, type) => dispatch => {
+    let max = 3;
+    if(type === 'sideDishes') {
+        max = 5;
+    }
+    if(dishes.length >= max) {
+        dispatch(setAlert(`Wasn't possible to insert dish, ${max} is the maximum.`, "danger"));
+    } else {
+        dispatch({
+            type: ADD_DISH,
+            payload: { type }
+        })
+    }
 }
 
 export const updateDish = ({ type, index, value }) => dispatch => {

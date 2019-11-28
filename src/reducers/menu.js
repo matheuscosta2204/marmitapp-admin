@@ -29,7 +29,7 @@ const initialState = {
 };
 
 const newMenu = {
-    date: moment().format('DD/MM/YYYY'),
+        date: moment().format('DD/MM/YYYY'),
         mainDishes: [""],
         sideDishes: [""],
         salads: [""],
@@ -48,9 +48,12 @@ export default function menu(state = initialState, action) {
         case ADD_MENU:
             return {
                 ...state,
-                tabKey: moment().format('DD/MM/YYYY'),
+                tabKey: moment(payload.date).format('DD/MM/YYYY'),
                 menus: {
-                    [moment().format('DD/MM/YYYY')]: newMenu,
+                    [moment(payload.date).format('DD/MM/YYYY')]: {
+                        ...newMenu,
+                        date: moment(payload.date).format('DD/MM/YYYY')
+                    },
                     ...state.menus
                 }
             }

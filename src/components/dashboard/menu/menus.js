@@ -7,9 +7,11 @@ import ListMenus from './listMenus';
 import { addMenu, removeMenu } from '../../../actions/menu';
 import './menus.scss';
 
-const DatePickerButton = ({ value, onClick }) => (
-    <Button variant="primary" onClick={onClick}>{value}</Button>
-);
+const DatePickerButton = ({ value, onClick }) => {
+    return (
+        <Button variant="primary" onClick={onClick}>{value}</Button>
+    );
+};
 
 const Menus = ({ tabKey, menus, objectMenus, addMenu, removeMenu }) => {
     const [date, setDate] = useState(new Date());
@@ -23,7 +25,7 @@ const Menus = ({ tabKey, menus, objectMenus, addMenu, removeMenu }) => {
                     onChange={date => setDate(date)}
                     customInput={<DatePickerButton />}
                 />
-                <Button variant="success" onClick={() => addMenu(objectMenus)}>Add Menu</Button>
+                <Button variant="success" onClick={() => addMenu(objectMenus, date)}>Add Menu</Button>
                 <Button variant="danger" onClick={() => removeMenu(objectMenus, tabKey)}>Remove Menu</Button>
             </div>
             <ListMenus menus={menus} />
