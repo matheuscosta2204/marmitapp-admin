@@ -9,30 +9,26 @@ const Dishes = ({ dishes, title, type, addDish, updateDish, removeDish }) => {
     let color;
     switch(type) {
         case 'mainDishes':
-            color = '#0066ff';
+            color = '#2393FA';
             break;
         case 'sideDishes':
-            color = '#cc9900';
+            color = '#224B5E';
             break;
         case 'salads':
-            color = '#006600';
+            color = '#14B386';
             break;
         case 'desserts':
-            color = '#ff6666';
+            color = '#D09EA8';
             break;
         default:
             color = '#000';
     }
-    if(type === 'mainDishes') {
-        color = '#0066ff';
-    } else if(type) {
-
-    }
+    
     return (
         <div className="dishes-container" style={{ borderLeftWidth: '3px', borderLeftStyle: 'solid', borderColor: color }}>
             <div className="dishes-header">
                 <h4>{title}</h4>
-                <Button variant="success" onClick={() => addDish(dishes, type)}>Add Dish</Button>
+                <Button variant="outline-success" onClick={() => addDish(dishes, type)}>Add Dish</Button>
             </div>
             {dishes.map((dish, index) => (
                 <Dish 

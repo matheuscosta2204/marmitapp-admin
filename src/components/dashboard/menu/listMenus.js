@@ -7,8 +7,15 @@ import Dishes from './dishes';
 import './menus.scss';
 
 const Menus = ({ menus, tabKey, setTabKey }) => {
+
+    const changeTab = k => {
+        if(true) {
+
+        }
+        setTabKey(k);
+    }
     return (
-        <Tabs id="controlled-tab-example" activeKey={tabKey} onSelect={k => setTabKey(k)} className="menus mt-5">
+        <Tabs id="controlled-tab-example" activeKey={tabKey} onSelect={changeTab} className="menus mt-5">
             {menus.map(menu => (
                 <Tab eventKey={menu.date} title={menu.date} key={menu.date}>
                     <Dishes dishes={menu.mainDishes} type="mainDishes" title="Main Dishes" />

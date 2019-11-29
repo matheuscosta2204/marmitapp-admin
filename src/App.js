@@ -12,6 +12,7 @@ import middleware from './middleware';
 import Routes from './router/router';
 import setAuthToken from './utils/setAuthToken';
 import { loadUser } from './actions/authedUser';
+import BootstrapTheme from './utils/bootstrapTheme';
 
 const store = createStore(reducer, middleware);
 
@@ -27,6 +28,7 @@ function App() {
 
   return (
     <Provider store={store}>
+      <BootstrapTheme />
       <Container className="container">
         <Toolbar />
         <Alert />

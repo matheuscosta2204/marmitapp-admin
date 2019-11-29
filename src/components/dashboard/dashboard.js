@@ -1,13 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Row, Col, Tabs, Tab } from 'react-bootstrap';
+import { connect } from 'react-redux';
 
 import Account from './account';
 import Menus from './menu/menus';
 
 import './dashboard.scss';
+import { getMenus } from '../../actions/menu';
 
-const Dashboard = () => {
-    const [key, setKey] = useState('menus');
+const Dashboard = ({ getMenus }) => {
+    const [key, setKey] = useState('account');
+
+    useEffect(() => {
+        getMenus()
+    }, [])
 
     return (
         <Row>
@@ -25,4 +31,4 @@ const Dashboard = () => {
     );
 };
 
-export default Dashboard;
+export default connect(null, { getMenus })(Dashboard);

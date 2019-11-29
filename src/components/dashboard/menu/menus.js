@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import DatePicker from 'react-datepicker';
 
 import ListMenus from './listMenus';
-import { addMenu, removeMenu } from '../../../actions/menu';
+import { addMenu, removeMenu, saveMenus } from '../../../actions/menu';
 import './menus.scss';
 
 const DatePickerButton = ({ value, onClick }) => {
@@ -13,7 +13,7 @@ const DatePickerButton = ({ value, onClick }) => {
     );
 };
 
-const Menus = ({ tabKey, menus, objectMenus, addMenu, removeMenu }) => {
+const Menus = ({ tabKey, menus, objectMenus, addMenu, removeMenu, saveMenus }) => {
     const [date, setDate] = useState(new Date());
 
     return (
@@ -29,6 +29,9 @@ const Menus = ({ tabKey, menus, objectMenus, addMenu, removeMenu }) => {
                 <Button variant="danger" onClick={() => removeMenu(objectMenus, tabKey)}>Remove Menu</Button>
             </div>
             <ListMenus menus={menus} />
+            <div className="buttons-menu-container">
+                <Button variant="success" onClick={() => saveMenus(objectMenus, tabKey)}>Save</Button>
+            </div>
         </div>
     )
 };
@@ -43,4 +46,4 @@ function mapStateToProps({ menu }) {
     }
 };
 
-export default connect(mapStateToProps, { addMenu, removeMenu })(Menus);
+export default connect(mapStateToProps, { addMenu, removeMenu, saveMenus })(Menus);
