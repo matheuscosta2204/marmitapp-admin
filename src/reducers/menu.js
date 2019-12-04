@@ -1,4 +1,4 @@
-import { GET_MENUS, SET_TAB_KEY, ADD_MENU, REMOVE_MENU, ADD_DISH, UPDATE_DISH, REMOVE_DISH, CLEAR_MENUS } from '../actions/menu';
+import { GET_MENUS, SET_TAB_KEY, ADD_MENU, REMOVE_MENU, ADD_DISH, UPDATE_DISH, REMOVE_DISH, CLEAR_MENUS, CLEAR_TAB_CHANGES } from '../actions/menu';
 import moment from 'moment';
 
 const newMenu = {
@@ -34,7 +34,13 @@ export default function menu(state = initialState, action) {
         case SET_TAB_KEY:
             return {
                 ...state,
+                tabChanges: false,
                 tabKey: payload.key
+            }
+        case CLEAR_TAB_CHANGES:
+            return {
+                ...state,
+                tabChanges: false
             }
         case ADD_MENU:
             return {
@@ -70,6 +76,7 @@ export default function menu(state = initialState, action) {
         case UPDATE_DISH:
             return {
                 ...state,
+                tabChanges: true,
                 menus: {
                     ...state.menus,
                     [state.tabKey]: {

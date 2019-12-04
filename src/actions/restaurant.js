@@ -30,9 +30,15 @@ export const getCurrentRestaurant = () => async dispatch => {
     try {
         const res = await axios.get(`${api}/api/restaurant/current`);
 
+        let isComplete = false;
+
+        if(res.data.logo !== "") {
+            isComplete = true;
+        }
+
         dispatch({
             type: GET_CURRENT_RESTAURANT,
-            payload: res.data
+            payload: { data: res.data, isComplete }
         });
     } catch (err) {
         dispatch({

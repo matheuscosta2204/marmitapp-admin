@@ -6,14 +6,18 @@ import { setTabKey } from '../../../actions/menu';
 import Dishes from './dishes';
 import './menus.scss';
 
-const Menus = ({ menus, tabKey, setTabKey }) => {
+const Menus = ({ menus, tabKey, setTabKey, tabChanges }) => {
 
     const changeTab = k => {
-        if(true) {
-
+        if(tabChanges) {
+            if (window.confirm('There are some changes in this tab, if you leave, you might be lose those changes!')) {
+                setTabKey(k);
+            }
+        } else {
+            setTabKey(k);
         }
-        setTabKey(k);
     }
+
     return (
         <Tabs id="controlled-tab-example" activeKey={tabKey} onSelect={changeTab} className="menus mt-5">
             {menus.map(menu => (
@@ -30,6 +34,7 @@ const Menus = ({ menus, tabKey, setTabKey }) => {
 
 function mapStateToProps({ menu }) {
     return {
+        tabChanges: menu.tabChanges,
         tabKey: menu.tabKey
     }
 }

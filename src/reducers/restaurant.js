@@ -1,10 +1,11 @@
-import { SEARCH_SUCCESS, SEARCH_FAIL, GET_CURRENT_RESTAURANT, RESTAURANT_CURRENT_ERROR } from '../actions/restaurant';
+import { SEARCH_SUCCESS, SEARCH_FAIL, GET_CURRENT_RESTAURANT, RESTAURANT_CURRENT_ERROR, UPDATE_SUCCESS } from '../actions/restaurant';
 
 const initialState = {
     restaurants: [],
     loading: true,
     current: {},
-    error: {}
+    error: {},
+    isComplete: false
 }
 
 export default function auth (state = initialState, action) {
@@ -14,7 +15,8 @@ export default function auth (state = initialState, action) {
         case GET_CURRENT_RESTAURANT:
             return {
                 ...state,
-                current: payload,
+                current: payload.data,
+                isComplete: payload.isComplete,
                 loading: false
             }
         case RESTAURANT_CURRENT_ERROR:
@@ -22,6 +24,14 @@ export default function auth (state = initialState, action) {
                 ...state,
                 error: payload,
                 loading: false
+            }
+        case UPDATE_SUCCESS:
+            return {
+                ...state,
+                isComplete: true,
+                current: {
+                    ...payload
+                }
             }
         case SEARCH_SUCCESS:
             return {

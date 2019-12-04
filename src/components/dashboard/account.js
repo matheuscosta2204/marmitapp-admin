@@ -10,14 +10,14 @@ import EmptySet from '../../media/svg/empty-set.svg';
 
 const Account = ({ loading, restaurant, getCurrentRestaurant, setAlert, updateCurrentRestaurant, updatePassword }) => {
     const { getRootProps, getInputProps } = useDropzone({ 
-        accept: 'image/*', 
+        accept: 'image/jpeg, image/png', 
         multiple: false, 
         maxSize: 300000, 
         onDrop: (files) => getBase64Img(files[0])
     });
 
     const [dropzoneError, setDropzoneError] = useState(null);
-    const [dropzoneLoading, setLropzoneLoading] = useState(false);    
+    const [dropzoneLoading, setLropzoneLoading] = useState(false);
     const [formData, setFormData] = useState({
         logo: EmptySet,
         name: '',

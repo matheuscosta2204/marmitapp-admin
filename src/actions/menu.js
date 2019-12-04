@@ -11,6 +11,7 @@ export const REMOVE_DISH = 'REMOVE_DISH';
 export const SET_TAB_KEY = 'SET_TAB_KEY';
 export const SAVE_FAIL = 'SAVE_FAIL';
 export const CLEAR_MENUS = 'CLEAR_MENUS';
+export const CLEAR_TAB_CHANGES = 'CLEAR_TAB_CHANGES';
 
 const api = 'http://localhost:5000';
 
@@ -113,6 +114,9 @@ export const saveMenus = (menus, tabKey) => async dispatch => {
 
         await axios.post(`${api}/api/menu`, body, config);
 
+        dispatch({
+            type: CLEAR_TAB_CHANGES
+        })
         dispatch(setAlert("Menus saved successfuly", "success"));
     } catch (err){
         const errors = err.response.data.errors;

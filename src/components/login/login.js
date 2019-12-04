@@ -36,12 +36,23 @@ const Login = (props) => {
                 <Form className="login-form">
                     <Form.Group controlId="formBasicEmail">
                         <Form.Label>Email address</Form.Label>
-                        <Form.Control type="email" placeholder="Enter email" name="email" value={email} onChange={e => onChange(e)} />
+                        <Form.Control 
+                            type="email" 
+                            placeholder="Enter email" 
+                            name="email" 
+                            value={email} 
+                            onChange={e => onChange(e)} />
                     </Form.Group>
 
                     <Form.Group controlId="formBasicPassword">
                         <Form.Label>Password</Form.Label>
-                        <Form.Control type="password" placeholder="Enter password" name="password" value={password} onChange={e => onChange(e)}/>
+                        <Form.Control 
+                            type="password" 
+                            placeholder="Enter password" 
+                            autoComplete="off"
+                            name="password" 
+                            value={password} 
+                            onChange={e => onChange(e)}/>
                     </Form.Group>
                     
                     <Button variant="success" block type="button" onClick={onSubmit}>
