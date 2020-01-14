@@ -13,7 +13,7 @@ export const SAVE_FAIL = 'SAVE_FAIL';
 export const CLEAR_MENUS = 'CLEAR_MENUS';
 export const CLEAR_TAB_CHANGES = 'CLEAR_TAB_CHANGES';
 
-const api = 'http://localhost:5000';
+const api = 'https://marmitapp-admin.herokuapp.com';
 
 export const getMenus = () => async dispatch => {
     try {

@@ -8,7 +8,7 @@ export const RESTAURANT_CURRENT_ERROR = 'RESTAURANT_CURRENT_ERROR';
 export const UPDATE_SUCCESS = 'UPDATE_SUCCESS';
 export const UPDATE_FAIL = 'UPDATE_FAIL';
 
-const api = 'http://localhost:5000';
+const api = 'https://marmitapp-admin.herokuapp.com';
 
 // SEARCH PARTNERS
 export const searchPartners = (filter) => async dispatch => {
