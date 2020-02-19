@@ -1,12 +1,12 @@
-import { GET_MENUS, SET_TAB_KEY, ADD_MENU, REMOVE_MENU, ADD_DISH, UPDATE_DISH, REMOVE_DISH, CLEAR_MENUS, CLEAR_TAB_CHANGES } from '../actions/menu';
+import { GET_MENUS, SET_TAB_KEY, ADD_MENU, REMOVE_MENU, ADD_DISH, UPDATE_DISH, UPDATE_DISH_VALUE, REMOVE_DISH, CLEAR_MENUS, CLEAR_TAB_CHANGES } from '../actions/menu';
 import moment from 'moment';
 
 const newMenu = {
     date: moment().format('DD/MM/YYYY'),
-    mainDishes: [""],
-    sideDishes: [""],
-    salads: [""],
-    desserts: [""]
+    mainDishes: [{description: "", value: ""}],
+    sideDishes: [{description: "", value: ""}],
+    salads: [{description: "", value: ""}],
+    desserts: [{description: "", value: ""}]
 }
 
 const initialState = {
@@ -69,7 +69,7 @@ export default function menu(state = initialState, action) {
                     ...state.menus,
                     [state.tabKey]: {
                         ...state.menus[state.tabKey],
-                        [payload.type]: [...state.menus[state.tabKey][payload.type], ""]
+                        [payload.type]: [...state.menus[state.tabKey][payload.type], {description: "", value: ""}]
                     }
                 }
             }
@@ -83,7 +83,24 @@ export default function menu(state = initialState, action) {
                         ...state.menus[state.tabKey],
                         [payload.type]: state.menus[state.tabKey][payload.type].map((dish, index) => {
                             if (payload.index === index) {
-                                dish = payload.value;
+                                dish.description = payload.value;
+                            }
+                            return dish;
+                        })
+                    }
+                }
+            }
+        case UPDATE_DISH_VALUE:
+            return {
+                ...state,
+                tabChanges: true,
+                menus: {
+                    ...state.menus,
+                    [state.tabKey]: {
+                        ...state.menus[state.tabKey],
+                        [payload.type]: state.menus[state.tabKey][payload.type].map((dish, index) => {
+                            if (payload.index === index) {
+                                dish.value = payload.value;
                             }
                             return dish;
                         })

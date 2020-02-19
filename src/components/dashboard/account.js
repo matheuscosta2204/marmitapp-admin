@@ -28,6 +28,7 @@ const Account = ({ loading, restaurant, getCurrentRestaurant, setAlert, updateCu
         zipCode: '',
         address: '',
         number: '',
+        whatsapp: true,
         phone: '',
         active: true
     });
@@ -42,12 +43,13 @@ const Account = ({ loading, restaurant, getCurrentRestaurant, setAlert, updateCu
             zipCode: loading || !restaurant.zipCode ? '' : restaurant.zipCode,
             address: loading || !restaurant.address ? '' : restaurant.address,
             number: loading || !restaurant.number ? '' : restaurant.number,
+            whatsapp: loading || !restaurant.whatsapp ? '' : restaurant.whatsapp,
             phone: loading || !restaurant.phone ? '' : restaurant.phone,
             active: loading || !restaurant.active ? false : restaurant.active,
         });
     }, [loading]);
 
-    const { logo, name, cnpj, email, password, newPassword, zipCode, address, number, phone, active } = formData;
+    const { logo, name, cnpj, email, password, newPassword, zipCode, address, number, whatsapp, phone, active } = formData;
 
     const onChange = e =>
         setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -220,6 +222,18 @@ const Account = ({ loading, restaurant, getCurrentRestaurant, setAlert, updateCu
                 </Form.Group>
             </Form.Row>
             <Form.Row>
+                <Form.Group as={Col} md="4" controlId="formWhatsApp">
+                    <Form.Label>WhatsApp</Form.Label>
+                    <Form.Check 
+                        custom
+                        type="switch"
+                        id={"whats-switch"}
+                        label="Accept orders by WhatsApp?"
+                        name="whatsapp"
+                        checked={whatsapp}
+                        onChange={e => onChangeCheckbox(e)} 
+                    />
+                </Form.Group>
                 <Form.Group as={Col} md="4" controlId="formPhone">
                     <Form.Label>Phone</Form.Label>
                     <Form.Control 
@@ -234,7 +248,7 @@ const Account = ({ loading, restaurant, getCurrentRestaurant, setAlert, updateCu
                 <Form.Check 
                     custom
                     type="switch"
-                    id={"custom-switch"}
+                    id={"active-switch"}
                     label="Active"
                     name="active"
                     checked={active}

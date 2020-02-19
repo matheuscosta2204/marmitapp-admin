@@ -1,0 +1,20 @@
+.buttons-meal-container {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding-right: 15px;
+}
+
+.buttons-menu-container button {
+    margin: 0 0 0 20px;
+}
+
+.meal-option-container {
+    padding: 20px 10px 5px 10px;
+    border-bottom: 1px solid gray;
+}
+
+.meal-option-container:last-child {
+    padding: 20px 10px 5px 10px;
+    border-bottom-width: 0;
+}

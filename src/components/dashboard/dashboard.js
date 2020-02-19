@@ -4,13 +4,14 @@ import { connect } from 'react-redux';
 
 import Account from './account';
 import Menus from './menu/menus';
+import MealOptions from './mealOptions/mealOptions';
 
 import './dashboard.scss';
 import { getMenus } from '../../actions/menu';
 import { setAlert } from '../../actions/alert';
 
 const Dashboard = ({ isComplete, getMenus, setAlert }) => {
-    const [key, setKey] = useState('account');
+    const [key, setKey] = useState('mealOptions');
 
     useEffect(() => {
         getMenus()
@@ -30,6 +31,9 @@ const Dashboard = ({ isComplete, getMenus, setAlert }) => {
                 <Tabs id="controlled-tab-example" activeKey={key} onSelect={k => changeTab(k)} className="dashboard">
                     <Tab eventKey="account" title="Account">
                         <Account />
+                    </Tab>
+                    <Tab eventKey="mealOptions" title="Meal Options">
+                        <MealOptions />
                     </Tab>
                     <Tab eventKey="menus" title="Menus">
                         <Menus />

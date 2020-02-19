@@ -10,7 +10,7 @@ export const LOGIN_SUCCESS = 'LOGIN_SUCCESS';
 export const LOGIN_FAIL = 'LOGIN_FAIL';
 export const LOGOUT = 'LOGOUT'; 
 
-const api = 'https://marmitapp-admin.herokuapp.com'
+const api = 'https://marmitapp-admin.herokuapp.com';
 
 // LOAD RESTAURANT
 export const loadUser = () => async dispatch => {

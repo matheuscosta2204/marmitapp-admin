@@ -7,6 +7,7 @@ export const ADD_MENU = 'ADD_MENU';
 export const REMOVE_MENU = 'REMOVE_MENU';
 export const ADD_DISH = 'ADD_DISH';
 export const UPDATE_DISH = 'UPDATE_DISH';
+export const UPDATE_DISH_VALUE = 'UPDATE_DISH_VALUE';
 export const REMOVE_DISH = 'REMOVE_DISH';
 export const SET_TAB_KEY = 'SET_TAB_KEY';
 export const SAVE_FAIL = 'SAVE_FAIL';
@@ -14,6 +15,7 @@ export const CLEAR_MENUS = 'CLEAR_MENUS';
 export const CLEAR_TAB_CHANGES = 'CLEAR_TAB_CHANGES';
 
 const api = 'https://marmitapp-admin.herokuapp.com';
+//const api = 'http://localhost:5000'
 
 export const getMenus = () => async dispatch => {
     try {
@@ -102,6 +104,22 @@ export const removeMenu = (menus, tabKey) => async dispatch => {
     }
 }
 
+const getMenu = async (id) => {
+    try {
+        const config = {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        }
+
+        const res = await axios.get(`${api}/api/menu/${id}`, config);
+
+        return res.data;
+    } catch (err){
+        return null;
+    }
+}
+
 export const saveMenus = (menus, tabKey) => async dispatch => {
     try {
         const config = {
@@ -112,11 +130,17 @@ export const saveMenus = (menus, tabKey) => async dispatch => {
 
         const body = JSON.stringify({ ...menus[tabKey] });
 
-        await axios.post(`${api}/api/menu`, body, config);
+        const menu = await getMenu(menus[tabKey]._id);
+
+        if(menu) {
+            await axios.put(`${api}/api/menu`, body, config);
+        } else {
+            await axios.post(`${api}/api/menu`, body, config);
+        }
 
         dispatch({
             type: CLEAR_TAB_CHANGES
-        })
+        });
         dispatch(setAlert("Menus saved successfuly", "success"));
     } catch (err){
         const errors = err.response.data.errors;
@@ -153,5 +177,12 @@ export const removeDish = (type, index) => dispatch => {
     dispatch({
         type: REMOVE_DISH,
         payload: { type, index }
+    })
+}
+
+export const updateDishValue = ({ type, index, value }) => dispatch => {
+    dispatch({ 
+        type: UPDATE_DISH_VALUE,
+        payload: { type, index, value }
     })
 }

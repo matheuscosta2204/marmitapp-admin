@@ -48,7 +48,7 @@ export const getCurrentRestaurant = () => async dispatch => {
     }
 }
 
-export const updateCurrentRestaurant = ({ logo, address, zipCode, number, phone, active }) => async dispatch => {
+export const updateCurrentRestaurant = ({ logo, address, zipCode, number, phone, active, whatsapp }) => async dispatch => {
     try {
         const config = {
             headers: {
@@ -56,7 +56,7 @@ export const updateCurrentRestaurant = ({ logo, address, zipCode, number, phone,
             }
         }
 
-        const body = JSON.stringify({ logo, address, zipCode: zipCode.replace(/[^a-z\d\s]+/gi, ""), number, phone: phone.replace(/[^a-z\d\s]+/gi, ""), active });
+        const body = JSON.stringify({ logo, address, zipCode: zipCode.replace(/[^a-z\d\s]+/gi, ""), number, whatsapp, phone: phone.replace(/[^a-z\d\s]+/gi, ""), active });
 
         const res = await axios.put(`${api}/api/restaurant/completeinfo`, body, config);
 
