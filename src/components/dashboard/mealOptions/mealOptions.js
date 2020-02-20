@@ -1,20 +1,25 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
 
-import { addOption, removeOption, saveOptions } from '../../../actions/mealOptions';
+import { loadMealOptions, addOption, removeOption, saveOptions } from '../../../actions/mealOptions';
 import ListMealOptions from './listMealOptions';
 import './mealOptions.scss';
 
-const MealOptions = ({ options, addOption, removeOption, saveOptions }) => {
+const MealOptions = ({ mealOptions, loadMealOptions, addOption, removeOption, saveOptions }) => {
+
+    useEffect(() => {
+        loadMealOptions();
+    }, []);
+
     return (
         <div className="dashboard-box">
             <div className="buttons-meal-container">
-                <Button variant="outline-success" onClick={() => addOption(options)}>Add Option</Button>
+                <Button variant="outline-success" onClick={() => addOption(mealOptions.options)}>Add Option</Button>
             </div>
-            <ListMealOptions onDelete={removeOption} options={options} />
+            <ListMealOptions onDelete={removeOption} options={mealOptions.options} />
             <div className="buttons-meal-container">
-                <Button variant="success" onClick={saveOptions}>Save</Button>
+                <Button variant="success" onClick={() => saveOptions(mealOptions)}>Save</Button>
             </div>
         </div>
     )
@@ -23,8 +28,8 @@ const MealOptions = ({ options, addOption, removeOption, saveOptions }) => {
 
 function mapStateToProps({ mealOptions }) {
     return {
-        options: mealOptions
+        mealOptions
     }
 }
 
-export default connect(mapStateToProps, { addOption, removeOption, saveOptions })(MealOptions);
+export default connect(mapStateToProps, { loadMealOptions, addOption, removeOption, saveOptions })(MealOptions);

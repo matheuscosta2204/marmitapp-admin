@@ -15,7 +15,7 @@ const MealOption = ({ index, option, onDelete, updateOptionTitle, updateOptionDe
                     aria-label="Large" 
                     aria-describedby="inputGroup-sizing-sm" 
                     value={option.title}
-                    onChange={event => updateOptionTitle(index, event.targe.value)} 
+                    onChange={event => updateOptionTitle(index, event.target.value)} 
                 />
             </InputGroup>
             <InputGroup className="mb-3" as={Col}>
@@ -25,13 +25,13 @@ const MealOption = ({ index, option, onDelete, updateOptionTitle, updateOptionDe
                         placeholder="0.00" 
                         type="number" 
                         value={option.price} 
-                        onChange={event => updateOptionPrice(index, event.targe.value)}
+                        onChange={event => updateOptionPrice(index, event.target.value)}
                     />
                 </InputGroup.Prepend>
                 <FormControl
                     placeholder="Enter the option description"
                     value={option.description}
-                    onChange={event => updateOptionDescription(index, event.targe.value)}
+                    onChange={event => updateOptionDescription(index, event.target.value)}
                 />
                 <InputGroup.Append>
                     <Button variant="outline-danger" onClick={onDelete}>X</Button>
