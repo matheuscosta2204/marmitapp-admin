@@ -5,7 +5,8 @@ const ListMealOptions = ({ options, onDelete }) => {
     return (
         <div>
             {options.map((option, index) => (
-                <MealOption 
+                <MealOption
+                    key={index} 
                     option={option} 
                     onDelete={() => onDelete(index)} 
                     index={index} />

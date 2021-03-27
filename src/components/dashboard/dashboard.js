@@ -11,7 +11,7 @@ import { getMenus } from '../../actions/menu';
 import { setAlert } from '../../actions/alert';
 
 const Dashboard = ({ isComplete, getMenus, setAlert }) => {
-    const [key, setKey] = useState('mealOptions');
+    const [key, setKey] = useState('account');
 
     useEffect(() => {
         getMenus()

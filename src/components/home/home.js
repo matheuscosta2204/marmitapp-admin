@@ -1,15 +1,20 @@
 import React from 'react';
 import { Row } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSearch } from '@fortawesome/free-solid-svg-icons'
 import QRCode from 'qrcode.react';
+import { connect } from 'react-redux';
 
 import './home.scss';
 import GooglePlayLogo from '../../media/svg/google-play.svg';
 import AppStoreLogo from '../../media/svg/app-store.svg';
 
-const Home = () => {
+const Home = ({ isAuthenticated }) => {
+    if(isAuthenticated) {
+        return <Redirect to="/dashboard" />;
+    }
+
     return (
         <>
             <Row className="flex-column align-items-center home-content">
@@ -33,4 +38,10 @@ const Home = () => {
     )
 }
 
-export default Home;
+function mapStateToProps({ auth }) {
+    return {
+        isAuthenticated: auth.isAuthenticated
+    }
+}
+
+export default connect(mapStateToProps)(Home);

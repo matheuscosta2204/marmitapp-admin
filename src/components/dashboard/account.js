@@ -30,7 +30,14 @@ const Account = ({ loading, restaurant, getCurrentRestaurant, setAlert, updateCu
         number: '',
         whatsapp: true,
         phone: '',
-        active: true
+        active: true,
+        distanceLimit: 5,
+        paymentWay: {
+            cash: false,
+            debit: false,
+            credit: false,
+            voucher: false
+        }
     });
 
     useEffect(() => {
@@ -46,16 +53,23 @@ const Account = ({ loading, restaurant, getCurrentRestaurant, setAlert, updateCu
             whatsapp: loading || !restaurant.whatsapp ? '' : restaurant.whatsapp,
             phone: loading || !restaurant.phone ? '' : restaurant.phone,
             active: loading || !restaurant.active ? false : restaurant.active,
+            distanceLimit: loading || !restaurant.distanceLimit ? 5 : restaurant.distanceLimit,
+            paymentWay: loading || !restaurant.paymentWay ? { cash: false, debit: false, credit: false, voucher: false } : restaurant.paymentWay
         });
     }, [loading]);
 
-    const { logo, name, cnpj, email, password, newPassword, zipCode, address, number, whatsapp, phone, active } = formData;
+    const { logo, name, cnpj, email, password, newPassword, zipCode, address, number, whatsapp, phone, active, distanceLimit, paymentWay } = formData;
+
+    const { cash, debit, credit, voucher } = paymentWay;
 
     const onChange = e =>
         setFormData({ ...formData, [e.target.name]: e.target.value });
 
     const onChangeCheckbox = e =>
         setFormData({ ...formData, [e.target.name]: !formData[e.target.name] });
+
+    const onPaymentWayChange = e =>
+        setFormData({ ...formData, paymentWay: { ...formData.paymentWay, [e.target.name]: !formData.paymentWay[e.target.name] } });
 
     function getBase64Img(file) {
         if(typeof file !== 'undefined') {
@@ -222,6 +236,19 @@ const Account = ({ loading, restaurant, getCurrentRestaurant, setAlert, updateCu
                 </Form.Group>
             </Form.Row>
             <Form.Row>
+                <Form.Group as={Col} md="12" controlId="formZipCode">
+                    <Form.Label>Distance Limit - {distanceLimit}Km </Form.Label>
+                    <Form.Control 
+                        type="range" 
+                        name="distanceLimit" 
+                        value={distanceLimit}
+                        min="3" 
+                        max="20" 
+                        step="0.5" 
+                        onChange={e => onChange(e)} />
+                </Form.Group>
+            </Form.Row>
+            <Form.Row>
                 <Form.Group as={Col} md="4" controlId="formWhatsApp">
                     <Form.Label>WhatsApp</Form.Label>
                     <Form.Check 
@@ -255,6 +282,50 @@ const Account = ({ loading, restaurant, getCurrentRestaurant, setAlert, updateCu
                     onChange={e => onChangeCheckbox(e)} 
                 />
             </Form.Group>
+            <Form.Row>
+                <Form.Group as={Col} md="2" controlId="formPaymentWay">
+                    <Form.Label>Payment Ways</Form.Label>
+                    <Form.Check 
+                        custom
+                        type="checkbox"
+                        id={"cash-check"}
+                        label="Cash"
+                        name="cash"
+                        checked={cash}
+                        onChange={e => onPaymentWayChange(e)} 
+                    />
+                    <Form.Check 
+                        custom
+                        type="checkbox"
+                        id={"debit-check"}
+                        label="Debit Card"
+                        name="debit"
+                        checked={debit}
+                        onChange={e => onPaymentWayChange(e)} 
+                    />
+                </Form.Group>
+                <Form.Group as={Col} md="2" controlId="formPaymentWay">
+                    <Form.Label>&nbsp;</Form.Label>
+                    <Form.Check 
+                        custom
+                        type="checkbox"
+                        id={"credit-check"}
+                        label="Credit Card"
+                        name="credit"
+                        checked={credit}
+                        onChange={e => onPaymentWayChange(e)} 
+                    />
+                    <Form.Check 
+                        custom
+                        type="checkbox"
+                        id={"voucher-check"}
+                        label="Voucher"
+                        name="voucher"
+                        checked={voucher}
+                        onChange={e => onPaymentWayChange(e)} 
+                    />
+                </Form.Group>
+            </Form.Row>
             <Button type="submit" variant="success">Submit form</Button>
         </Form>
     )

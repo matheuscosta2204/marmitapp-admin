@@ -4,6 +4,7 @@ import {
   Route
 } from "react-router-dom";
 
+
 import PrivateRoute from './privateRoute';
 import Home from '../components/home/home';
 import Login from '../components/login/login';
@@ -11,7 +12,7 @@ import Register from '../components/register/register';
 import Partners from "../components/partners/partners";
 import Dashboard from '../components/dashboard/dashboard';
 
-const RouterApp = () => {
+const RouterApp = ({ isAuthenticated }) => {
     return (
         <Switch>
             <Route exact path="/" component={Home} />

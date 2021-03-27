@@ -8,7 +8,8 @@ export const RESTAURANT_CURRENT_ERROR = 'RESTAURANT_CURRENT_ERROR';
 export const UPDATE_SUCCESS = 'UPDATE_SUCCESS';
 export const UPDATE_FAIL = 'UPDATE_FAIL';
 
-const api = 'https://marmitapp-admin.herokuapp.com';
+//const api = 'https://marmitapp-admin.herokuapp.com';
+const api = 'http://localhost:5000';
 
 // SEARCH PARTNERS
 export const searchPartners = (filter) => async dispatch => {
@@ -48,7 +49,7 @@ export const getCurrentRestaurant = () => async dispatch => {
     }
 }
 
-export const updateCurrentRestaurant = ({ logo, address, zipCode, number, phone, active, whatsapp }) => async dispatch => {
+export const updateCurrentRestaurant = ({ logo, address, zipCode, number, phone, active, whatsapp, distanceLimit, paymentWay }) => async dispatch => {
     try {
         const config = {
             headers: {
@@ -56,7 +57,7 @@ export const updateCurrentRestaurant = ({ logo, address, zipCode, number, phone,
             }
         }
 
-        const body = JSON.stringify({ logo, address, zipCode: zipCode.replace(/[^a-z\d\s]+/gi, ""), number, whatsapp, phone: phone.replace(/[^a-z\d\s]+/gi, ""), active });
+        const body = JSON.stringify({ logo, address, zipCode: zipCode.replace(/[^a-z\d\s]+/gi, ""), number, whatsapp, phone: phone.replace(/[^a-z\d\s]+/gi, ""), active, distanceLimit, paymentWay });
 
         const res = await axios.put(`${api}/api/restaurant/completeinfo`, body, config);
 
