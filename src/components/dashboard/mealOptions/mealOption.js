@@ -2,9 +2,9 @@ import React from 'react';
 import { InputGroup, FormControl, Button, Col } from 'react-bootstrap';
 import { connect } from 'react-redux';
 
-import { updateOptionTitle, updateOptionDescription, updateOptionPrice } from '../../../actions/mealOptions';
+import { updateOptionTitle, updateOptionDescription, updateOptionPrice, updateOptionDishQuantity, updateOptionDishDescription } from '../../../actions/mealOptions';
 
-const MealOption = ({ index, option, onDelete, updateOptionTitle, updateOptionDescription, updateOptionPrice }) => {
+const MealOption = ({ index, option, onDelete, updateOptionTitle, updateOptionDishQuantity, updateOptionDishDescription, updateOptionPrice }) => {
     return (
         <div className="meal-option-container">
             <InputGroup size="lg" className="mb-3" as={Col} md="6">
@@ -17,6 +17,9 @@ const MealOption = ({ index, option, onDelete, updateOptionTitle, updateOptionDe
                     value={option.title}
                     onChange={event => updateOptionTitle(index, event.target.value)} 
                 />
+                <InputGroup.Append>
+                    <Button variant="outline-danger" onClick={onDelete}>X</Button>
+                </InputGroup.Append>
             </InputGroup>
             <InputGroup className="mb-3" as={Col}>
                 <InputGroup.Prepend>
@@ -28,17 +31,49 @@ const MealOption = ({ index, option, onDelete, updateOptionTitle, updateOptionDe
                         onChange={event => updateOptionPrice(index, event.target.value)}
                     />
                 </InputGroup.Prepend>
-                <FormControl
-                    placeholder="Enter the option description"
-                    value={option.description}
-                    onChange={event => updateOptionDescription(index, event.target.value)}
-                />
-                <InputGroup.Append>
-                    <Button variant="outline-danger" onClick={onDelete}>X</Button>
-                </InputGroup.Append>
+            </InputGroup>
+            <InputGroup>
+                <InputGroup.Prepend className="mb-3" as={Col}>
+                    <InputGroup.Text>Main Dishes</InputGroup.Text>
+                    <FormControl
+                        placeholder="Max Quantity" 
+                        type="number" 
+                        value={option.main.quantity} 
+                        onChange={event => updateOptionDishQuantity(index, 'main', event.target.value)}
+                    />
+                </InputGroup.Prepend>
+                <InputGroup.Prepend className="mb-3" as={Col}>
+                    <InputGroup.Text>Side Dishes</InputGroup.Text>
+                    <FormControl
+                        placeholder="Max Quantity" 
+                        type="number" 
+                        value={option.side.quantity} 
+                        onChange={event => updateOptionDishQuantity(index, 'side', event.target.value)}
+                    />
+                </InputGroup.Prepend>
+            </InputGroup>
+            <InputGroup>
+                <InputGroup.Prepend className="mb-3" as={Col}>
+                    <InputGroup.Text>Salads</InputGroup.Text>
+                    <FormControl
+                        placeholder="Max Quantity" 
+                        type="number" 
+                        value={option.salads.quantity} 
+                        onChange={event => updateOptionDishQuantity(index, 'salads', event.target.value)}
+                    />
+                </InputGroup.Prepend>
+                <InputGroup.Prepend className="mb-3" as={Col}>
+                    <InputGroup.Text>Deserts</InputGroup.Text>
+                    <FormControl
+                        placeholder="Max Quantity" 
+                        type="number" 
+                        value={option.deserts.quantity} 
+                        onChange={event => updateOptionDishQuantity(index, 'deserts', event.target.value)}
+                    />
+                </InputGroup.Prepend>
             </InputGroup>
         </div>
     )
 };
 
-export default connect(null, { updateOptionTitle, updateOptionDescription, updateOptionPrice })(MealOption);
+export default connect(null, { updateOptionTitle, updateOptionDishQuantity, updateOptionDishDescription, updateOptionPrice })(MealOption);

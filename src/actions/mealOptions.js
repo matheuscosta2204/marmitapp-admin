@@ -5,11 +5,13 @@ export const LOAD_MEAL_OPTIONS = 'LOAD_MEAL_OPTIONS';
 export const UPDATE_OPTION_TITLE = 'UPDATE_OPTION_TITLE';
 export const UPDATE_OPTION_DESCRIPTION = 'UPDATE_OPTION_DESCRIPTION';
 export const UPDATE_OPTION_PRICE = 'UPDATE_OPTION_PRICE';
+export const UPDATE_OPTION_DISH_QUANTITY = 'UPDATE_OPTION_DISH_QUANTITY';
+export const UPDATE_OPTION_DISH_DESCRIPTION = 'UPDATE_OPTION_DISH_DESCRIPTION';
 export const ADD_OPTION = 'ADD_OPTION';
 export const REMOVE_OPTION = 'REMOVE_OPTION';
 
-const api = 'https://marmitapp-admin.herokuapp.com';
-//const api = 'http://localhost:5000';
+//const api = 'https://marmitapp-admin.herokuapp.com';
+const api = 'http://localhost:5000';
 
 export const loadMealOptions = () => async dispatch => {
     try {
@@ -48,6 +50,20 @@ export const updateOptionPrice = (index, price) => dispatch => {
     dispatch({
         type: UPDATE_OPTION_PRICE,
         payload: { index, price }
+    })
+}
+
+export const updateOptionDishQuantity = (index, type, quantity) => dispatch => {
+    dispatch({
+        type: UPDATE_OPTION_DISH_QUANTITY,
+        payload: { index, type, quantity }
+    })
+}
+
+export const updateOptionDishDescription = (index, type, description) => dispatch => {
+    dispatch({
+        type: UPDATE_OPTION_DISH_DESCRIPTION,
+        payload: { index, type, description }
     })
 }
 

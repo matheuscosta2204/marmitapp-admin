@@ -1,9 +1,16 @@
-import { LOAD_MEAL_OPTIONS, ADD_OPTION, REMOVE_OPTION, UPDATE_OPTION_TITLE, UPDATE_OPTION_DESCRIPTION, UPDATE_OPTION_PRICE } from '../actions/mealOptions';
+import { LOAD_MEAL_OPTIONS, ADD_OPTION, REMOVE_OPTION, UPDATE_OPTION_TITLE, UPDATE_OPTION_DESCRIPTION, UPDATE_OPTION_PRICE, UPDATE_OPTION_DISH_QUANTITY, UPDATE_OPTION_DISH_DESCRIPTION } from '../actions/mealOptions';
 
 const initialState = {
     _id: null,
     restaurant: null,
-    options: [{ title: "", description: "", price: 0.00 }]
+    options: [{ 
+        title: "", 
+        price: 0.00, 
+        main: { quantity: 0},
+        side: { quantity: 0},
+        salads: { quantity: 0},
+        deserts: { quantity: 0}
+    }]
 }
 
 export default function mealOptions(state = initialState, action) {
@@ -43,6 +50,26 @@ export default function mealOptions(state = initialState, action) {
                 options: state.options.map((option, index) => {
                     if(index === payload.index) {
                         option.price = payload.price;
+                    }
+                    return option;
+                })
+            }
+        case UPDATE_OPTION_DISH_QUANTITY:
+            return {
+                ...state,
+                options: state.options.map((option, index) => {
+                    if(index === payload.index) {
+                        option[payload.type] = { ...option[payload.type], quantity: payload.quantity };
+                    }
+                    return option;
+                })
+            }
+        case UPDATE_OPTION_DISH_DESCRIPTION:
+            return {
+                ...state,
+                options: state.options.map((option, index) => {
+                    if(index === payload.index) {
+                        option[payload.type] = { ...option[payload.type], description: payload.description };
                     }
                     return option;
                 })
